@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Data</title>
+</head>
+<body>
+    <h1>Logged Users</h1>
+    <table id="user-table" border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </table>
+
+    <script>
+        fetch("https://biodata-task.onrender.com/get_users/")  // Replace with your actual Render API URL
+            .then(response => response.json())
+            .then(data => {
+                let table = document.getElementById("user-table");
+                data.forEach(user => {
+                    let row = table.insertRow();
+                    row.insertCell(0).innerText = user.name;
+                    row.insertCell(1).innerText = user.age;
+                });
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    </script>
+</body>
+</html>

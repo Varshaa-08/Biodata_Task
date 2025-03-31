@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 
 # FastAPI backend URL
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://biodata-task.onrender.com"
 
 st.title("Biodata")
 

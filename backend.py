@@ -41,6 +41,6 @@ async def add_user(user: User):
     return {"message": "User added successfully"}
 
 # API to get all users
-@app.get("/")
+@app.get("/get_user")
 def read_root():
     return FileResponse("index.html")  # Serve the HTML page

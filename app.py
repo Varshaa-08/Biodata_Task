@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import pandas as pd
 
 # FastAPI backend URL
 API_URL = "https://biodata-task.onrender.com"
@@ -21,13 +20,6 @@ if submit and name and age:
     else:
         st.error("Error adding user.")
 
-# Fetch and display logged users
-st.subheader("Logged Users:")
-users_response = requests.get(f"{API_URL}/get_users/")
-if users_response.status_code == 200:
-    users_data = users_response.json()
-    if users_data:
-        df = pd.DataFrame(users_data)
-        st.table(df)  # Display data as a table
-    else:
-        st.write("No users logged yet.")
+# Show a link to view logged users in Render (as an HTML table)
+st.subheader("View Logged Users:")
+st.markdown(f"[Click here to see users](https://biodata-task.onrender.com/get_users/)", unsafe_allow_html=True)

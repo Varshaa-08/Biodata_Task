@@ -2,6 +2,8 @@ import csv
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
+from fastapi.responses import FileResponse
+import os
 
 app = FastAPI()
 csv_file = "users.csv"  # File to store user data
@@ -39,6 +41,6 @@ async def add_user(user: User):
     return {"message": "User added successfully"}
 
 # API to get all users
-@app.get("/get_users/", response_model=List[User])
-async def get_users():
-    return users
+@app.get("/")
+def read_root():
+    return FileResponse("index.html")  # Serve the HTML page

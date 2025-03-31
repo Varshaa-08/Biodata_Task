@@ -2,7 +2,7 @@ import csv
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
-from fastapi.responses import FileResponse
+from fastapi.responses import HTMLResponse
 import os
 
 app = FastAPI()
@@ -40,7 +40,20 @@ async def add_user(user: User):
     save_users(users)  # Save to CSV
     return {"message": "User added successfully"}
 
-# API to get all users
-@app.get("/get_users/")
+# API to get all users as an HTML table
+@app.get("/get_users/", response_class=HTMLResponse)
 async def get_users():
-    return users  # Returns the list of users
+    if not users:
+        return "<h2>No users found</h2>"
+
+    # Generate an HTML table
+    table_html = "<table border='1' style='border-collapse: collapse; width: 50%; text-align: left;'>"
+    table_html += "<tr><th>Name</th><th>Age</th></tr>"
+    
+    for user in users:
+        table_html += f"<tr><td>{user.name}</td><td>{user.age}</td></tr>"
+    
+    table_html += "</table>"
+    
+    return table_html  # Returns an HTML table
+

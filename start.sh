@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Start FastAPI backend in the background
-nohup uvicorn backend:app --host 0.0.0.0 --port 8000 &
+# Stop any existing instances of FastAPI and Streamlit
+pkill -f "uvicorn backend:app"
+pkill -f "streamlit run app.py"
 
-# Wait for the backend to start
-sleep 5
+# Start FastAPI backend
+uvicorn backend:app --host 0.0.0.0 --port 10000 &
 
 # Start Streamlit frontend
-nohup streamlit run app.py --server.port 8501 --server.address 0.0.0.0 &
+streamlit run app.py --server.port 8501 --server.address 0.0.0.0

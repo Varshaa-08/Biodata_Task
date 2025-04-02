@@ -33,7 +33,7 @@ def save_users(users):
 # Load existing users on startup
 users = load_users()
 
-f# Default route to check if FastAPI is running
+# Default route to check if FastAPI is running
 @app.get("/")
 def read_root():
     return {"message": "FastAPI Backend is Running!"}
